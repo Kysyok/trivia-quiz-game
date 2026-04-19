@@ -159,3 +159,252 @@
     display: block;
     width: 100%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Стили для страницы лобби ===== */
+
+.lobby-page {
+    background: #f5f5f5;
+}
+
+.lobby-container {
+    max-width: 600px;
+    width: 100%;
+    background: #ffffff;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Заголовок лобби */
+.lobby-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #000000;
+}
+
+.lobby-title {
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    color: #000000;
+    margin-bottom: 1rem;
+}
+
+.room-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.room-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: lowercase;
+    color: #666;
+}
+
+.room-code {
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 8px;
+    background: #f5f5f5;
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #000000;
+}
+
+/* Секция с игроками */
+.players-section {
+    margin-bottom: 2.5rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: lowercase;
+    color: #000000;
+}
+
+.player-count {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #666;
+    background: #f5f5f5;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0;
+}
+
+/* Список игроков */
+.players-list {
+    min-height: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    padding: 0.5rem;
+}
+
+/* Карточка игрока */
+.player-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+}
+
+.player-item:last-child {
+    margin-bottom: 0;
+}
+
+.player-item:hover {
+    background: #f0f0f0;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.player-avatar {
+    width: 40px;
+    height: 40px;
+    background: #000000;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.player-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000000;
+}
+
+.player-status {
+    font-size: 0.75rem;
+    color: #666;
+    text-transform: lowercase;
+}
+
+.player-status.ready {
+    color: #00aa00;
+}
+
+/* Кнопка удаления игрока */
+.btn-remove {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1.5px solid #000000;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #000000;
+    transition: all 0.15s ease;
+}
+
+.btn-remove:hover {
+    background: #ff0000;
+    color: #ffffff;
+    border-color: #ff0000;
+}
+
+/* Пустое состояние */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 250px;
+    text-align: center;
+    color: #999;
+}
+
+.empty-state p {
+    margin-bottom: 0.5rem;
+    text-transform: lowercase;
+}
+
+.empty-state p:first-child {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #666;
+}
+
+.empty-hint {
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+/* Футер лобби */
+.lobby-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.btn-start:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #cccccc;
+    border-color: #999999;
+    color: #666666;
+}
+
+.btn-start:disabled:hover {
+    background: #cccccc;
+    color: #666666;
+}
+
+.btn-leave {
+    background: transparent;
+    border: 1.5px solid #000000;
+}
+
+.btn-leave:hover {
+    background: #000000;
+    color: #ffffff;
+}
