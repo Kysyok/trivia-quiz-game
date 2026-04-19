@@ -4,45 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Lobby · Quiz</title>
-    
-    <!-- Шрифты -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
-    
-    <!-- Стили -->
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/components.css">
 </head>
-<body class="lobby-page">
-    <main class="lobby-container">
-        <h1 class="lobby-title">you are in the lobby</h1>
-        
-        <div class="player-info-card">
+<body class="player-lobby-page">
+    <main class="player-lobby-container">
+        <!-- Заголовок -->
+        <header class="player-lobby-header">
+            <h1 class="player-lobby-title">waiting for game</h1>
+        </header>
+
+        <!-- Информация о игроке и комнате -->
+        <div class="player-room-info">
             <div class="info-row">
-                <span class="info-label">nickname</span>
-                <span class="info-value" id="displayNickname">PlayerOne</span>
+                <span class="info-label">player</span>
+                <span class="info-value" id="displayNickname">Player</span>
             </div>
             <div class="info-row">
-                <span class="info-label">room pin</span>
-                <span class="info-value" id="displayRoomPin">123456</span>
+                <span class="info-label">room</span>
+                <span class="info-value room-code-display" id="displayRoom">000000</span>
             </div>
         </div>
 
-        <div class="waiting-message">
-            <p>waiting for the admin to start the game</p>
-            <div class="loading-indicator">
+        <!-- Индикатор ожидания -->
+        <div class="waiting-indicator">
+            <div class="waiting-animation">
                 <span class="dot"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
             </div>
+            <p class="waiting-text">waiting for host to start the game...</p>
         </div>
-        
-        <!-- Кнопка выхода (опционально) -->
-        <a href="index.html" class="btn btn-outline btn-block" style="margin-top: 2rem;">leave lobby</a>
+
+        <!-- Кнопка выхода -->
+        <footer class="player-lobby-footer">
+            <a href="index.html" class="btn btn-secondary btn-block">leave lobby</a>
+        </footer>
     </main>
 
-    <!-- Здесь можно будет подставить реальные данные из URL или localStorage, 
-         но для статической вёрстки оставляем заглушки -->
+    <script src="js/main.js"></script>
+    <script>
+        // Получаем данные из sessionStorage
+        const nickname = sessionStorage.getItem('playerNickname') || 'Player';
+        const roomNumber = sessionStorage.getItem('roomNumber') || '000000';
+        
+        // Отображаем данные
+        document.getElementById('displayNickname').textContent = nickname;
+        document.getElementById('displayRoom').textContent = roomNumber;
+        
+        // Проверяем статус игры (в реальном приложении через WebSocket)
+        // Для демо: перенаправление на игру через 5 секунд
+        setTimeout(() => {
+            // Проверяем, не началась ли игра
+            const gameStarted = sessionStorage.getItem('gameStarted');
+            if (gameStarted === 'true') {
+                window.location.href = 'quiz.html';
+            }
+        }, 1000);
+        
+        // Очищаем данные при уходе со страницы
+        window.addEventListener('beforeunload', function() {
+            // Не очищаем данные, они нужны для игры
+        });
+    </script>
 </body>
 </html>

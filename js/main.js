@@ -44,3 +44,7 @@ document.addEventListener('click', function(e) {
         clearPlayerData();
     }
 });
+
+
+//ДЛЯ ИМИТАЦИИ ИГРЫ
+

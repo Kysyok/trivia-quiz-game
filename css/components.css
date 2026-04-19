@@ -179,6 +179,9 @@
 
 
 
+
+
+
 /* ===== Стили для страницы лобби ===== */
 
 .lobby-page {
@@ -407,4 +410,373 @@
 .btn-leave:hover {
     background: #000000;
     color: #ffffff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Стили для лобби игрока ===== */
+
+.player-lobby-page {
+    background: #f5f5f5;
+}
+
+.player-lobby-container {
+    max-width: 500px;
+    width: 100%;
+    background: #ffffff;
+    padding: 2.5rem 2rem;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+/* Заголовок */
+.player-lobby-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #000000;
+}
+
+.player-lobby-title {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    color: #000000;
+}
+
+/* Информация о игроке и комнате */
+.player-room-info {
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+}
+
+.info-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.info-row:first-child {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: lowercase;
+    color: #666;
+}
+
+.info-value {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #000000;
+}
+
+.room-code-display {
+    font-family: 'Courier New', monospace;
+    font-size: 1.8rem;
+    letter-spacing: 4px;
+    font-weight: 700;
+}
+
+/* Индикатор ожидания */
+.waiting-indicator {
+    margin-bottom: 3rem;
+}
+
+.waiting-animation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: #000000;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+    0%, 60%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    30% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+.waiting-text {
+    font-size: 1rem;
+    color: #666;
+    text-transform: lowercase;
+}
+
+/* Футер */
+.player-lobby-footer {
+    margin-top: 2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Стили для экрана вопроса ===== */
+
+.quiz-page {
+    background: #f5f5f5;
+}
+
+.quiz-container {
+    max-width: 800px;
+    width: 100%;
+    background: #ffffff;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Таймер */
+.timer-section {
+    margin-bottom: 2rem;
+}
+
+.timer-bar {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border: 1px solid #000000;
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.timer-progress {
+    height: 100%;
+    width: 100%;
+    background: #000000;
+    transition: width 1s linear;
+}
+
+.timer-progress.warning {
+    background: #ff0000;
+}
+
+.timer-text {
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    color: #000000;
+}
+
+/* Информация о вопросе */
+.question-info {
+    margin-bottom: 1rem;
+}
+
+.question-number {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-transform: lowercase;
+    color: #666;
+}
+
+/* Текст вопроса */
+.question-text {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 2rem;
+    color: #000000;
+}
+
+/* Индикатор хода */
+.turn-indicator {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 2rem;
+}
+
+.turn-label {
+    font-size: 0.9rem;
+    text-transform: lowercase;
+    color: #666;
+}
+
+.turn-nickname {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+.turn-indicator.my-turn {
+    background: #000000;
+}
+
+.turn-indicator.my-turn .turn-label,
+.turn-indicator.my-turn .turn-nickname {
+    color: #ffffff;
+}
+
+/* Сетка ответов */
+.answers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Кнопки ответов */
+.answer-btn {
+    padding: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: left;
+    background: #ffffff;
+    border: 2px solid #000000;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.answer-btn:hover:not(:disabled) {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+.answer-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.answer-btn.selected {
+    background: #000000;
+    color: #ffffff;
+}
+
+.answer-marker {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid currentColor;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.answer-btn.selected .answer-marker {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+}
+
+.answer-text {
+    flex: 1;
+}
+
+/* Сообщение ожидания */
+.waiting-message {
+    text-align: center;
+    padding: 3rem;
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+}
+
+.waiting-message p {
+    font-size: 1.2rem;
+    color: #666;
+    text-transform: lowercase;
+}
+
+.waiting-message.hidden {
+    display: none;
+}
+
+.answers-grid.hidden {
+    display: none;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .quiz-container {
+        padding: 1.5rem;
+    }
+    
+    .question-text {
+        font-size: 1.5rem;
+    }
+    
+    .answers-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .answer-btn {
+        padding: 1rem;
+    }
 }

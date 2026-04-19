@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz · Question</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="quiz-page">
+    <main class="quiz-container">
+        <!-- Таймер -->
+        <div class="timer-section">
+            <div class="timer-bar">
+                <div class="timer-progress" id="timerProgress"></div>
+            </div>
+            <div class="timer-text" id="timerText">15s</div>
+        </div>
+
+        <!-- Информация о вопросе -->
+        <div class="question-info">
+            <span class="question-number">question 1 / 5</span>
+        </div>
+
+        <!-- Текст вопроса -->
+        <h2 class="question-text" id="questionText">
+            What is the capital of France?
+        </h2>
+
+        <!-- Информация о том, кто отвечает -->
+        <div class="turn-indicator" id="turnIndicator">
+            <span class="turn-label">answering</span>
+            <span class="turn-nickname" id="currentPlayer">alice</span>
+        </div>
+
+        <!-- Варианты ответов -->
+        <div class="answers-grid" id="answersContainer">
+            <!-- Варианты будут здесь -->
+        </div>
+
+        <!-- Сообщение если не ваш ход -->
+        <div class="waiting-message" id="waitingMessage">
+            <p>waiting for your turn...</p>
+        </div>
+    </main>
+
+    <script src="js/quiz.js"></script>
+</body>
+</html>
