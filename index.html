@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join or Create · Quiz</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="entry-page">
+    <main class="entry-container">
+        <h1 class="entry-title">join the room</h1>
+
+        <!-- Форма присоединения -->
+        <form class="join-form" action="#" method="get">
+            <div class="input-group">
+                <label for="roomNumber" class="input-label">room number</label>
+                <input type="text" id="roomNumber" name="room" placeholder="123456" class="text-input" inputmode="numeric">
+            </div>
+
+            <div class="input-group">
+                <label for="nickname" class="input-label">nickname</label>
+                <input type="text" id="nickname" name="nickname" placeholder="Your name" class="text-input">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">join</button>
+        </form>
+
+        <div class="separator">
+            <span class="separator-line"></span>
+            <span class="separator-text">or</span>
+            <span class="separator-line"></span>
+        </div>
+
+        <a href="lobby.html" class="btn btn-secondary btn-block">create game</a>
+    </main>
+    
+    <!-- Подключаем скрипт валидации -->
+    <script src="js/validation.js"></script>
+</body>
+</html>

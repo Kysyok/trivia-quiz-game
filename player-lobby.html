@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Lobby · Quiz</title>
+    
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+    
+    <!-- Стили -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="lobby-page">
+    <main class="lobby-container">
+        <h1 class="lobby-title">you are in the lobby</h1>
+        
+        <div class="player-info-card">
+            <div class="info-row">
+                <span class="info-label">nickname</span>
+                <span class="info-value" id="displayNickname">PlayerOne</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">room pin</span>
+                <span class="info-value" id="displayRoomPin">123456</span>
+            </div>
+        </div>
+
+        <div class="waiting-message">
+            <p>waiting for the admin to start the game</p>
+            <div class="loading-indicator">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+        
+        <!-- Кнопка выхода (опционально) -->
+        <a href="index.html" class="btn btn-outline btn-block" style="margin-top: 2rem;">leave lobby</a>
+    </main>
+
+    <!-- Здесь можно будет подставить реальные данные из URL или localStorage, 
+         но для статической вёрстки оставляем заглушки -->
+</body>
+</html>

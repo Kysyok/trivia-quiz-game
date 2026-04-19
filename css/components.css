@@ -1,0 +1,161 @@
+/* components.css — кнопки, инпуты и вспомогательные классы */
+
+/* Поля ввода */
+.text-input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    border: 1.5px solid #222;
+    background-color: #fff;
+    color: #000;
+    border-radius: 0;
+    transition: border-color 0.15s ease;
+    font-family: inherit;
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: #000;
+    box-shadow: inset 0 0 0 1px #000;
+}
+
+.text-input::placeholder {
+    color: #888;
+    font-weight: 300;
+    text-transform: lowercase;
+}
+
+/* Кнопки — базовый стиль */
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.9rem 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1;
+    border: 2px solid transparent;
+    background: none;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
+    border-radius: 0;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* Основная кнопка (join) */
+.btn-primary {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #000;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+    background-color: #fff;
+    color: #000;
+    outline: none;
+}
+
+/* Вторичная кнопка (create game) */
+.btn-secondary {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+    background-color: #000;
+    color: #fff;
+    outline: none;
+}
+
+/* Активное состояние для обеих */
+.btn:active {
+    transform: scale(0.98);
+}
+
+
+/* ДЛЯ ИНПУТОВ */
+/* css/components.css */
+
+/* Стили для инпутов */
+.text-input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    border: 1.5px solid #000000;
+    background-color: #ffffff;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.text-input:focus {
+    outline: 2px solid #000000;
+    outline-offset: 0px;
+}
+
+.text-input::placeholder {
+    color: #999;
+    text-transform: lowercase;
+}
+
+/* Стиль для ошибки */
+.text-input.error {
+    border-color: #ff0000 !important;
+    border-width: 2px;
+    background-color: #fff5f5;
+}
+
+.text-input.error:focus {
+    outline-color: #ff0000;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-block;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    text-transform: lowercase;
+    border: 2px solid #000000;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.btn-secondary {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.btn-secondary:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
