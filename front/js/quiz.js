@@ -1,24 +1,18 @@
-// js/quiz.js — логика экрана вопроса
-
 document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем, что мы на странице квиза
     const questionText = document.getElementById('questionText');
     if (!questionText) return;
-
-    // ===== НАСТРОЙКИ =====
-    // Булева переменная: true = ваш ход, false = ход другого игрока
-    const IS_MY_TURN = false;
+    //true - я, false - другие
+    const IS_MY_TURN = false; 
     
-    const TIME_LIMIT = 15; // секунд
+    const TIME_LIMIT = 15; //секунды
     
-    // Тестовые данные
+    //тестовые данные
     const currentPlayer = IS_MY_TURN ? 'you' : 'alice';
     const question = {
         text: 'What is the capital of France?',
         options: ['London', 'Berlin', 'Paris', 'Madrid']
     };
     
-    // ===== DOM элементы =====
     const timerProgress = document.getElementById('timerProgress');
     const timerText = document.getElementById('timerText');
     const turnIndicator = document.getElementById('turnIndicator');

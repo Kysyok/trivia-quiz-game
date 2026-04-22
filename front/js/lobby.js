@@ -1,19 +1,18 @@
-// js/lobby.js — управление лобби администратора
+//управление лобби администратора
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем, что мы на странице лобби
+    //проверка что мы на странице лобби
     const playersList = document.getElementById('playersList');
     if (!playersList) return;
 
-    // Генерируем случайный код комнаты
+    //случайный код комнаты
     const roomCode = generateRoomCode();
     document.getElementById('roomCodeDisplay').textContent = roomCode;
     
-    // Сохраняем код комнаты
     sessionStorage.setItem('adminRoomCode', roomCode);
 
-    // Массив игроков
-        let players = [
+    //массив игроков
+    let players = [
         { id: 1, nickname: 'alice', joinedAt: new Date() },
         { id: 2, nickname: 'bob', joinedAt: new Date() },
         { id: 3, nickname: 'charlie', joinedAt: new Date() },
@@ -21,16 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: 5, nickname: 'eve', joinedAt: new Date() }
     ];
     
-    // DOM элементы
     const playerCountSpan = document.getElementById('playerCount');
     const startGameBtn = document.getElementById('startGameBtn');
 
-    // Генерация кода комнаты
+    //генерация кода комнаты
     function generateRoomCode() {
         return Math.floor(100000 + Math.random() * 900000).toString();
     }
 
-    // Добавление игрока (публичная функция для демо)
+    //добавление игрока
     window.addPlayer = function(nickname) {
         const player = {
             id: Date.now() + Math.random(),
@@ -42,21 +40,20 @@ document.addEventListener('DOMContentLoaded', function() {
         renderPlayers();
     };
 
-    // Удаление игрока (без подтверждения)
+    //удаление игрока
     function removePlayer(playerId) {
         players = players.filter(p => p.id !== playerId);
         renderPlayers();
     }
 
-    // Отрисовка списка игроков
+    //отрисовка списка игроков
     function renderPlayers() {
-        // Обновляем счетчик
+        //обновление счетчика
         playerCountSpan.textContent = players.length;
         
-        // Включаем/выключаем кнопку старта
         startGameBtn.disabled = players.length === 0;
         
-        // Если нет игроков — показываем пустое состояние
+        //если нет игроков показываем пустое состояние
         if (players.length === 0) {
             playersList.innerHTML = `
                 <div class="empty-state">
@@ -67,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Отрисовываем игроков
+        //сортировка игроков
         playersList.innerHTML = players.map(player => `
             <div class="player-item" data-player-id="${player.id}">
                 <div class="player-info">
@@ -82,30 +79,30 @@ document.addEventListener('DOMContentLoaded', function() {
         `).join('');
     }
 
-    // Обработчик удаления (глобальная функция для onclick)
+    //обработчик удаления
     window.removePlayerHandler = function(playerId) {
         removePlayer(playerId);
     };
 
-    // Обработчик кнопки Start Game
+    //обработчик кнопки Start Game
     startGameBtn.addEventListener('click', function() {
         if (players.length === 0) {
             alert('Cannot start game with no players');
             return;
         }
         
-        // Сохраняем список игроков
+        //сохоанение списока игроков
         sessionStorage.setItem('gamePlayers', JSON.stringify(players));
         sessionStorage.setItem('isAdmin', 'true');
         
-        // Переходим к первому вопросу
+        //переходим к первому вопросу
         window.location.href = 'quiz.html';
     });
 
-    // Инициализация — пустой список
+    //инициализация пустого списока игроков
     renderPlayers();
 
-    // Для демонстрации добавляем функцию в консоль
+    //вывод в консоль
     console.log('Admin Lobby ready. Room code:', roomCode);
     console.log('Use addPlayer("nickname") in console to simulate new player');
 });

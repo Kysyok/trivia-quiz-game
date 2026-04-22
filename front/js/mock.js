@@ -1,6 +1,5 @@
-// js/mock.js — моковые данные для демонстрации
-
-// Моковые игроки
+//данные
+//игроки
 const mockPlayers = [
     { id: 1, nickname: 'alice', score: 0 },
     { id: 2, nickname: 'bob', score: 0 },
@@ -8,7 +7,7 @@ const mockPlayers = [
     { id: 4, nickname: 'diana', score: 0 }
 ];
 
-// Моковые вопросы
+//вопросы
 const mockQuestions = [
     {
         id: 1,
@@ -33,13 +32,13 @@ const mockQuestions = [
     }
 ];
 
-// Моковые результаты
+//результаты
 const mockResults = {
     players: mockPlayers,
     questions: mockQuestions
 };
 
-// Экспорт для использования (если используете модули)
+//экспорт для использования
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { mockPlayers, mockQuestions, mockResults };
 }

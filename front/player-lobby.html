@@ -52,8 +52,8 @@
         document.getElementById('displayNickname').textContent = nickname;
         document.getElementById('displayRoom').textContent = roomNumber;
         
-        // Проверяем статус игры (в реальном приложении через WebSocket)
-        // Для демо: перенаправление на игру через 5 секунд
+        // Проверяем статус игры 
+        // Для демо перенаправление на игру через 5 секунд
         setTimeout(() => {
             // Проверяем, не началась ли игра
             const gameStarted = sessionStorage.getItem('gameStarted');
@@ -62,9 +62,9 @@
             }
         }, 1000);
         
-        // Очищаем данные при уходе со страницы
+        // для очстки данных при уходе со страницы
         window.addEventListener('beforeunload', function() {
-            // Не очищаем данные, они нужны для игры
+
         });
     </script>
 </body>

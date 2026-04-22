@@ -1,6 +1,6 @@
-// js/main.js — общие функции для всего проекта
+//общие функции для всего проекта
 
-// Функция для получения данных игрока
+//функция для получения данных игрока
 function getPlayerData() {
     return {
         nickname: sessionStorage.getItem('playerNickname') || 'Player',
@@ -9,14 +9,14 @@ function getPlayerData() {
     };
 }
 
-// Функция для получения кода комнаты
+//функция для получения кода комнаты
 function getRoomCode() {
     return sessionStorage.getItem('adminRoomCode') || 
            sessionStorage.getItem('roomNumber') || 
            '000000';
 }
 
-// Функция для очистки данных (при выходе)
+//функция для очистки данных при выхлде
 function clearPlayerData() {
     sessionStorage.removeItem('playerNickname');
     sessionStorage.removeItem('roomNumber');
@@ -25,7 +25,7 @@ function clearPlayerData() {
     sessionStorage.removeItem('gamePlayers');
 }
 
-// Функция для проверки авторизации
+//функция для проверки авторизации (нельзя оставить поля незаполненными)
 function checkAuth() {
     const nickname = sessionStorage.getItem('playerNickname');
     const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
@@ -37,7 +37,7 @@ function checkAuth() {
     return true;
 }
 
-// Добавляем обработчик для кнопки "leave lobby"
+//обработчик для кнопки leave lobby
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('btn-leave') || 
         (e.target.tagName === 'A' && e.target.href.includes('index.html'))) {
@@ -46,5 +46,4 @@ document.addEventListener('click', function(e) {
 });
 
 
-//ДЛЯ ИМИТАЦИИ ИГРЫ
 

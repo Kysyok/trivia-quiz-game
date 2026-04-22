@@ -1,6 +1,5 @@
-/* components.css — кнопки, инпуты и вспомогательные классы */
-
-/* Поля ввода */
+/* кнопки инпуты и тд */
+/* поля ввода */
 .text-input {
     width: 100%;
     padding: 0.9rem 1rem;
@@ -25,7 +24,7 @@
     text-transform: lowercase;
 }
 
-/* Кнопки — базовый стиль */
+/* кнопки базовый стиль */
 .btn {
     display: inline-block;
     font-weight: 600;
@@ -49,7 +48,7 @@
     width: 100%;
 }
 
-/* Основная кнопка (join) */
+/* основная кнопка join */
 .btn-primary {
     background-color: #000;
     color: #fff;

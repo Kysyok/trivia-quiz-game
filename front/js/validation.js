@@ -1,20 +1,19 @@
-// js/validation.js — валидация для страницы входа
+//валидация для страницы входа
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.join-form');
     const roomInput = document.getElementById('roomNumber');
     const nicknameInput = document.getElementById('nickname');
-    
-    // Проверяем, что мы на странице входа (есть форма)
+    //проверка что мы на странице входа
     if (!form || !roomInput || !nicknameInput) {
-        return; // Выходим если это другая страница
+        return; //выходим если это другая страница
     }
     
-    // Функция проверки пустых полей
+    //функция проверки пустых полей
     function validateForm() {
         let isValid = true;
         
-        // Проверка поля room number
+        //проверка поля room number
         if (!roomInput.value.trim()) {
             roomInput.classList.add('error');
             isValid = false;
@@ -22,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             roomInput.classList.remove('error');
         }
         
-        // Проверка поля nickname
+        //проверка поля nickname
         if (!nicknameInput.value.trim()) {
             nicknameInput.classList.add('error');
             isValid = false;
@@ -33,25 +32,25 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
     
-    // Обработка отправки формы
+    //обработка отправки формы
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         
         if (validateForm()) {
-            // Поля заполнены - перенаправляем в лобби игрока
+            //если поля заполнены значит перенаправляем в лобби игрока
             const roomNumber = roomInput.value.trim();
             const nickname = nicknameInput.value.trim();
             
-            // Сохраняем данные в sessionStorage для использования на других страницах
+            //сохраняем данные в sessionStorage для использования на других страницах
             sessionStorage.setItem('playerNickname', nickname);
             sessionStorage.setItem('roomNumber', roomNumber);
             
-            // Перенаправление на страницу ожидания игрока
+            //перенаправление на страницу ожидания игрока
             window.location.href = 'player-lobby.html';
         }
     });
     
-    // Убираем красную подсветку при вводе
+    //убираем красную подсветку при вводе
     roomInput.addEventListener('input', function() {
         if (this.value.trim()) {
             this.classList.remove('error');
@@ -64,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Дополнительно: только цифры для номера комнаты
+    //только цифры для номера комнаты
     roomInput.addEventListener('input', function() {
         this.value = this.value.replace(/\D/g, '').slice(0, 6);
     });
