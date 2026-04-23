@@ -1,5 +1,6 @@
 from api.slow_api.router import Router
-from app.game import Room, game
+from app.game import game
+from api.routes.checks import check_host, check_player_in_room, check_session, get_room
 
 router = Router()
 
@@ -7,20 +8,22 @@ router = Router()
 async def start_game(room_number, session_id):
     room_number = str(room_number)
 
-    if session_id not in game.sessions:
-        return {"error": "Invalid session"}
+    error = check_session(session_id)
+    if error:
+        return error
 
-    room = game.rooms.get(room_number)
-    if not room:
-        return {"error": "No such room"}
+    room, error = get_room(room_number)
+    if error:
+        return error
 
-    if room.host != session_id:
+    error = check_host(room, session_id)
+    if error:
         return {"error": "Only host can start the game"}
 
     if len(room.players) < 2:
         return {"error": "Need at least 2 players"}
 
-    room.started = True
+    room.start_game()
 
     return {"message": "Game started"}
 
@@ -28,15 +31,17 @@ async def start_game(room_number, session_id):
 async def leave_game(room_number, session_id):
     room_number = str(room_number)
 
-    if session_id not in game.sessions:
-        return {"error": "Invalid session"}
+    error = check_session(session_id)
+    if error:
+        return error
 
-    room = game.rooms.get(room_number)
-    if not room:
-        return {"error": "No such room"}
+    room, error = get_room(room_number)
+    if error:
+        return error
     
-    if session_id not in room.players:
-        return {"error": "Player not in room"}
+    error = check_player_in_room(room, session_id)
+    if error:
+        return error
     
     room.players.remove(session_id)
 
@@ -58,4 +63,3 @@ async def leave_game(room_number, session_id):
         ],
         "host": game.sessions[room.host]["nickname"]
     }
-
