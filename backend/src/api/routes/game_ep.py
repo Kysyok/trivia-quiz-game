@@ -1,8 +1,8 @@
-from api.slow_api.router import Router
+from api.slow_api.router import SlowAPIRouter
 from app.game import game
 from api.routes.checks import check_game_started, check_host, check_player_in_room, check_session, get_room
 
-router = Router()
+game_ep_router = SlowAPIRouter("GameEp")
 
 
 def get_current_player(room):
@@ -16,7 +16,7 @@ def get_current_player(room):
 
     return current_player
 
-@router.route("/state")
+@game_ep_router.route("/state")
 async def game_state(room_number, session_id):
     room_number = str(room_number)
 
@@ -70,7 +70,7 @@ async def game_state(room_number, session_id):
     }
 
 
-@router.route("/answer")
+@game_ep_router.route("/answer")
 async def answer_question(room_number, session_id, answer):
     room_number = str(room_number)
 
@@ -118,7 +118,7 @@ async def answer_question(room_number, session_id, answer):
     }
 
 
-@router.route("/next")
+@game_ep_router.route("/next")
 async def next_question(room_number, session_id):
     room_number = str(room_number)
 
@@ -165,7 +165,7 @@ async def next_question(room_number, session_id):
     }
 
 
-@router.route("/results")
+@game_ep_router.route("/results")
 async def game_results(room_number, session_id):
     room_number = str(room_number)
 

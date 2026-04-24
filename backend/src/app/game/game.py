@@ -1,4 +1,4 @@
-from question import QUESTIONS 
+from app.game.question import QUESTIONS
 
 class Room:
     def __init__(self, host_session):

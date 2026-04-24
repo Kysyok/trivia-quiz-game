@@ -1,14 +1,14 @@
 import random
 import uuid
 
-from api.slow_api.router import Router
-from app.game import Room, game
+from api.slow_api.router import SlowAPIRouter
+from app.game.game import Room, game
 
 
-router = Router()
+menu_router = SlowAPIRouter("Menu")
 
 
-@router.route("/join")
+@menu_router.route("/join")
 async def join_a_game(room_number, nickname):
     room_number = str(room_number)
 
@@ -43,7 +43,7 @@ async def join_a_game(room_number, nickname):
         ]
     }
 
-@router.route("/create")
+@menu_router.route("/create")
 async def create_a_game(nickname):
     session_id = str(uuid.uuid4())
 
