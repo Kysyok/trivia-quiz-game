@@ -1,3 +1,5 @@
 */.idea
 */.venv
 /backend/.env
+*.pyc
+__pycache__/
