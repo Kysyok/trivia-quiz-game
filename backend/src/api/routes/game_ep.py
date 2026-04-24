@@ -59,7 +59,6 @@ async def game_state(room_number, session_id):
         },
         "current_player": game.sessions[current_player]["nickname"],
         "your_turn": current_player == session_id,
-        "answered": current_player in room.answers,
         "players": [
             game.sessions[player]["nickname"]
             for player in room.players
@@ -99,9 +98,6 @@ async def answer_question(room_number, session_id, answer):
     if session_id != current_player:
         return {"error": "It is not your turn"}
 
-    if session_id in room.answers:
-        return {"error": "You already answered"}
-
     question = room.questions[room.current_question]
 
     try:
@@ -111,8 +107,6 @@ async def answer_question(room_number, session_id, answer):
 
     if answer < 0 or answer >= len(question["options"]):
         return {"error": "Invalid answer"}
-
-    room.answers[session_id] = answer
 
     correct = answer == question["correct"]
     if correct:
@@ -152,7 +146,6 @@ async def next_question(room_number, session_id):
         return {"error": "Game already finished"}
 
     room.current_question += 1
-    room.answers = {}
 
     if room.current_question >= len(room.questions):
         room.finished = True

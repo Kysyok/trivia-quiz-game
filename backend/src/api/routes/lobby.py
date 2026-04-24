@@ -23,7 +23,13 @@ async def start_game(room_number, session_id):
     if len(room.players) < 2:
         return {"error": "Need at least 2 players"}
 
-    room.start_game()
+    room.started = True
+    room.current_question = 0
+    room.finished = False
+    room.scores = {}
+
+    for player_session in room.players:
+        room.scores[player_session] = 0
 
     return {"message": "Game started"}
 
