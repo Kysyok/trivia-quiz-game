@@ -10,6 +10,7 @@ class Engine:
         self.rooms_id_range = [100_000, 1_000_000]
 
     def create_player_in_room(self, room_id, nickname):
+        room_id = int(room_id)
         if room_id not in self.rooms:
             raise JoinError("There is no such game")
         room_to_be_joined_to = self.rooms[room_id]
