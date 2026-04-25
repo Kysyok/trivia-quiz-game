@@ -43,6 +43,9 @@ class Engine:
         if room_id not in self.rooms:
             raise RoomError("There is no such room")
         self.rooms[room_id].remove_player(player_session_token, nickname)
+        if not self.rooms[room_id].players:
+            del self.rooms[room_id]
+            raise RoomError("No players left")
 
 
 game_engine = Engine()
