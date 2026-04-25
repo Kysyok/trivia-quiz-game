@@ -35,7 +35,7 @@ class Room:
                     raise SessionError("Player session tokens mismatch")
                 self.players.remove(player)
                 if self.host_session_token == player_session_token:
-                    self.host_session_token = player_session_token
+                    self.host_session_token = self.players[0].session_token
                 break
         else:
             raise RoomError("There is no such player")
