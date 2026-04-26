@@ -6,19 +6,19 @@ lobby_router = SlowAPIRouter("Lobby")
 
 
 @lobby_router.route("/start")
-async def start_game(player_session_token, room_id):
+async def start_game(player_session_token, room_id, questions_per_player):
     try:
-        game_engine.start_room(player_session_token, room_id)
+        questions_count_information = game_engine.start_room(player_session_token, room_id, questions_per_player)
     except StartError as error:
         return {"error": error.message}
 
-    return {"message": "The room has been started"}
+    return questions_count_information
 
 
 @lobby_router.route("/leave")
-async def leave_game(player_session_token, room_id, nickname):
+async def leave_game(player_session_token, room_id):
     try:
-        game_engine.remove_player_from_room(player_session_token, room_id, nickname)
+        game_engine.remove_player_from_room(player_session_token, room_id)
     except (RoomError, SessionError) as error:
         return {"error": error.message}
 
