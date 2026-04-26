@@ -1,5 +1,4 @@
 from api.slow_api.router import SlowAPIRouter
-from api.routes.checks import check_player_in_room, check_session, get_room
 from app.game.engine import game_engine
 from app.game.exceptions import RoomError, QuestionError
 
