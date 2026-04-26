@@ -63,4 +63,10 @@ class Engine:
         self.token_process(player_session_token, room_id)
         return self.rooms[room_id].propose_answer(player_session_token, answer)
 
+    def get_results(self, player_session_token, room_id):
+        room_id = self.room_id_process(room_id)
+        self.token_process(player_session_token, room_id)
+        return self.rooms[room_id].get_results()
+
+
 game_engine = Engine()

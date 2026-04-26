@@ -27,32 +27,10 @@ async def answer_question(player_session_token, room_id, answer):
 
 
 @game_router.route("/results")
-async def game_results(room_number, session_id):
-    room_number = str(room_number)
+async def game_results(player_session_token, room_id):
+    try:
+        results = game_engine.get_results(player_session_token, room_id)
+    except (RoomError, QuestionError) as error:
+        return {"error": error.message}
 
-    error = check_session(session_id)
-    if error:
-        return error
-
-    room, error = get_room(room_number)
-    if error:
-        return error
-
-    error = check_player_in_room(room, session_id)
-    if error:
-        return error
-
-    results = [
-        {
-            "nickname": game.sessions[player]["nickname"],
-            "score": room.scores.get(player, 0)
-        }
-        for player in room.players
-    ]
-
-    results.sort(key=lambda player: player["score"], reverse=True)
-
-    return {
-        "finished": room.finished,
-        "results": results
-    }
+    return results

@@ -87,6 +87,9 @@ class Room:
         self.players[0].answer(self.question, answer)
         return self.question.get()
 
+    def ger_results(self):
+        return {player.nickname: player.score for player in self.players}
+
 
 timer = time.monotonic()
 print(timer)
