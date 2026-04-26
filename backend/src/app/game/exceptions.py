@@ -20,3 +20,7 @@ class RoomError(GameError):
 class SessionError(GameError):
     def __init__(self, message):
         super().__init__(message)
+
+class QuestionError(GameError):
+    def __init__(self, message):
+        super().__init__(message)

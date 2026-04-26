@@ -6,4 +6,5 @@ class Player:
         self.nickname = nickname
         self.session_token = uuid.uuid4()
         self.score = int()
+        self.answering = False
 
