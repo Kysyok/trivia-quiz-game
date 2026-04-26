@@ -34,6 +34,10 @@ class Engine:
             raise StartError("There is no such room")
         return room_id
 
+    def token_process(self, player_session_token, room_id):
+        if player_session_token not in self.rooms[room_id].get_player_tokens():
+            raise SessionError("Invalid player session token")
+
     def start_room(self, player_session_token, room_id, questions_per_player):
         room_id = self.room_id_process(room_id)
         if self.rooms[room_id].host_session_token != player_session_token:
@@ -51,9 +55,12 @@ class Engine:
 
     def get_next_question(self, player_session_token, room_id):
         room_id = self.room_id_process(room_id)
-        if player_session_token not in self.rooms[room_id].get_player_tokens():
-            raise SessionError("Invalid player session token")
-        return self.rooms[room_id].get_question(player_session_token)
+        self.token_process(player_session_token, room_id)
+        return self.rooms[room_id].get_question()
 
+    def answer_question(self, player_session_token, room_id, answer):
+        room_id = self.room_id_process(room_id)
+        self.token_process(player_session_token, room_id)
+        return self.rooms[room_id].propose_answer(player_session_token, answer)
 
 game_engine = Engine()

@@ -8,3 +8,6 @@ class Player:
         self.score = int()
         self.answering = False
 
+    def answer(self, question, answer):
+        result = question.mark_answered(int(answer))
+        self.score += result

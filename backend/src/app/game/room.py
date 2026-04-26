@@ -1,6 +1,5 @@
 import random
 import time
-import uuid
 
 from app.game.exceptions import StartError, SessionError, RoomError
 from app.game.player import Player
@@ -67,17 +66,26 @@ class Room:
             "questions_count": len(self.questions)
         }
 
-    def get_question(self, player_session_token):
+    def get_question(self):
         self.raise_not_started_exception()
-        question = self.question.get(self.get_player_by_token(player_session_token))
+        self.raise_started_exception()
+        question = self.question.get()
         if not question:
             self.players_rotation()
             self.question = Question(self.questions.pop())
-            question = self.question.get(self.get_player_by_token(player_session_token))
+            question = self.question.get()
         return {
             "question": question,
             "answering": self.players[0].nickname
         }
+
+    def propose_answer(self, player_session_token, answer):
+        self.raise_not_started_exception()
+        self.raise_started_exception()
+        if not self.get_player_by_token(player_session_token).answering:
+            raise RoomError("You are not answering")
+        self.players[0].answer(self.question, answer)
+        return self.question.get()
 
 
 timer = time.monotonic()

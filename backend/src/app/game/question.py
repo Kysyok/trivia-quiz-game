@@ -1,16 +1,27 @@
 import time
-
-from app.game.exceptions import QuestionError
+import copy
 
 
 class Question:
-    def __init__(self, question, reasoning_time=10):
-        self._question = question
+    def __init__(self, question, reasoning_time=20, gap_time=5):
+        self.question = question
         self.expiration_date = time.monotonic() + reasoning_time
-        self.players_who_saw = list()
+        self.gap_time = gap_time
 
-    def get(self, player):
-        if player in self.players_who_saw:
-            raise QuestionError("You have already saw this question")
-        self.players_who_saw.append(player)
-        return self._question if time.monotonic() < self.expiration_date else None
+    def mark_answered(self, answer):
+        if "answered" in self.question:
+            return False
+        self.question["answered"] = int(answer)
+        return self.question["answered"] == self.question["correct"]
+
+    def get(self):
+        if condition_1 := time.monotonic() < self.expiration_date + self.gap_time:
+            return None
+        if "answered" in self.question and condition_1:
+            return self.question
+        if time.monotonic() > self.expiration_date:
+            self.mark_answered(-1)
+            return self.question
+        question = copy.deepcopy(self.question)
+        del question["correct"]
+        return self.question
