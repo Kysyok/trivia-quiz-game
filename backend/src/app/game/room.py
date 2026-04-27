@@ -11,12 +11,12 @@ class Room:
     def __init__(self):
         self.host_session_token = None
         self.players = list()
-        self.questions = set()
+        self.questions = list()
         self.question = Question(None)
         self.state = None  # None = not started, questions per player = started, False = finished
 
     def choose_questions(self, questions_per_player):
-        self.questions = set(random.sample(QUESTIONS, k=len(self.players) * questions_per_player))
+        self.questions = random.sample(QUESTIONS, k=len(self.players) * int(questions_per_player))
 
     def raise_started_exception(self):
         if self.state:
@@ -61,8 +61,8 @@ class Room:
 
     def start(self, questions_per_player):
         self.raise_started_exception()
-        self.state = len(self.questions)
         self.choose_questions(questions_per_player)
+        self.state = len(self.questions)
 
         return {
             "questions_count": len(self.questions)
