@@ -13,7 +13,7 @@ class Room:
         self.players = list()
         self.questions = set()
         self.question = Question(None)
-        self.state = None  # None = not started, True = started, False = finished
+        self.state = None  # None = not started, questions per player = started, False = finished
 
     def choose_questions(self, questions_per_player):
         self.questions = set(random.sample(QUESTIONS, k=len(self.players) * questions_per_player))
@@ -61,7 +61,7 @@ class Room:
 
     def start(self, questions_per_player):
         self.raise_started_exception()
-        self.state = True
+        self.state = len(self.questions)
         self.choose_questions(questions_per_player)
 
         return {
