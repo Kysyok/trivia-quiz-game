@@ -1,13 +1,26 @@
+const PROTOCOL = "http"
 const SERVER_ADDRESS = "localhost:12338"
 
 
-export async function clientJoinGame(roomId, nickname) {
-    const response = await fetch(`http://${SERVER_ADDRESS}/join`, {
+function formFetch(endpoint, jsonBody) {
+    return fetch(`${PROTOCOL}://${SERVER_ADDRESS}${endpoint}`, {
         method: "POST",
-        body: JSON.stringify({
-            "room_id": roomId,
-            "nickname": nickname
-        })
+        body: JSON.stringify(jsonBody)
+    })
+}
+
+
+export async function clientJoinGame(roomId, nickname) {
+    const response = await formFetch("/join", {
+        "room_id": roomId,
+        "nickname": nickname
+    })
+    return await response.json();
+}
+
+export async function clientCreateGame(nickname) {
+    const response = await formFetch("/create", {
+        "nickname": nickname
     })
     return await response.json();
 }

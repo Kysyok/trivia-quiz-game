@@ -1,4 +1,4 @@
-import { clientJoinGame } from "/js/api_client.js";
+import {clientCreateGame, clientJoinGame} from "/js/api_client.js";
 
 //валидация для страницы входа
 
@@ -11,7 +11,7 @@ function validateForm() {
     let isValid = true;
 
     //проверка поля room number
-    if (!roomInput.value.trim()) {
+    if (document.activeElement.textContent === "join" && !roomInput.value.trim()) {
         roomInput.classList.add('error');
         isValid = false;
     } else {
@@ -32,13 +32,15 @@ function validateForm() {
 //обработка отправки формы
 form.addEventListener('submit', async function(e) {
     e.preventDefault();
+    console.log("here")
 
     if (validateForm()) {
         //если поля заполнены значит перенаправляем в лобби игрока
         const roomNumber = roomInput.value.trim();
         const nickname = nicknameInput.value.trim();
 
-        const response = await clientJoinGame(roomNumber, nickname);
+        const response = document.activeElement.textContent === "join" ?
+            await clientJoinGame(roomNumber, nickname) : await clientCreateGame(nickname)
         if (response.error) {
             console.log(`Error! ${response.error}`)
             return
@@ -46,11 +48,12 @@ form.addEventListener('submit', async function(e) {
 
         //сохраняем данные в sessionStorage для использования на других страницах
         sessionStorage.setItem('playerNickname', nickname);
-        sessionStorage.setItem('roomNumber', roomNumber);
+        sessionStorage.setItem('roomNumber',
+            document.activeElement.textContent === "join" ? roomNumber : response.room_number);
         sessionStorage.setItem('sessionToken', response.session_token)
 
-        //перенаправление на страницу ожидания игрока
-        window.location.href = 'player_lobby.html';
+        //перенаправление на страницу ожидания
+        window.location.href = 'lobby.html';
     }
 });
 

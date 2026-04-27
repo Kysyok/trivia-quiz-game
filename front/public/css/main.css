@@ -75,7 +75,6 @@ body {
 .separator {
     display: flex;
     align-items: center;
-    margin: 2rem 0 1.8rem;
 }
 
 .separator-line {
