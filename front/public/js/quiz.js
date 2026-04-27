@@ -1,3 +1,7 @@
+if (![true, "roomNumber", "playerNickname", "sessionToken", "isAdmin", "questionsCount"].reduce(
+    (a, b) => a && (sessionStorage.getItem(b) != null)
+)) window.location.href = 'lobby.html'
+
 document.addEventListener('DOMContentLoaded', function() {
     const questionText = document.getElementById('questionText');
     if (!questionText) return;

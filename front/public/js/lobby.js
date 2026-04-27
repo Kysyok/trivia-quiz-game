@@ -1,7 +1,7 @@
 //управление лобби
 
 // redirection to the join page if sessionStorage is incomplete
-import {clientLeaveGame, clientPlayersAndStatus} from "/js/tools/api_client.js";
+import {clientLeaveGame, clientPlayersAndStatus, clientStartGame} from "/js/tools/api_client.js";
 import {redirectIfUnstarted} from "/js/tools/mixed.js";
 
 if (![true, "roomNumber", "playerNickname", "sessionToken", "isAdmin"].reduce(
@@ -44,12 +44,14 @@ async function playerListUpdateCycle() {
 }
 playerListUpdateCycle()
 
-document.querySelector("#start").addEventListener("click", () => {
-    console.log(1)})
+startButton.addEventListener("click", async (e) => {
+    e.preventDefault()
+    await clientStartGame(sessionStorage.getItem("sessionToken"), sessionStorage.getItem("roomNumber"))
+})
 
-document.querySelector("#leave").addEventListener("click", async () => {
-    const [token, room] = [sessionStorage.getItem("sessionToken"), sessionStorage.getItem("roomNumber")]
+document.querySelector("#leave").addEventListener("click", async (e) => {
+    e.preventDefault()
+    await clientLeaveGame(sessionStorage.getItem("sessionToken"), sessionStorage.getItem("roomNumber"))
     sessionStorage.clear()
     window.location.href = 'join.html';
-    await clientLeaveGame(token, room)
 })

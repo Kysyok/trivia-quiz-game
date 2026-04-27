@@ -37,7 +37,6 @@ function validateForm() {
 //обработка отправки формы
 form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    console.log("here")
 
     if (validateForm()) {
         //если поля заполнены значит перенаправляем в лобби игрока

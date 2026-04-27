@@ -26,6 +26,15 @@ export async function clientLeaveGame(playerSessionToken, roomId) {
     return await response.json();
 }
 
+export async function clientStartGame(playerSessionToken, roomId, questionsPerPlayer=15) {
+    const response = await formFetch("/start", {
+        "player_session_token": playerSessionToken,
+        "room_id": roomId,
+        "questions_per_player": questionsPerPlayer
+    })
+    return await response.json();
+}
+
 export async function clientCreateGame(nickname) {
     const response = await formFetch("/create", {
         "nickname": nickname
