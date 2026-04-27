@@ -13,11 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //массив игроков
     let players = [
-        { id: 1, nickname: 'alice', joinedAt: new Date() },
-        { id: 2, nickname: 'bob', joinedAt: new Date() },
-        { id: 3, nickname: 'charlie', joinedAt: new Date() },
-        { id: 4, nickname: 'diana', joinedAt: new Date() },
-        { id: 5, nickname: 'eve', joinedAt: new Date() }
+        { id: 1, nickname: 'alice', joinedAt: new Date(), score: 0 },
+        { id: 2, nickname: 'bob', joinedAt: new Date(), score: 0 },
+        { id: 3, nickname: 'charlie', joinedAt: new Date(), score: 0 },
+        { id: 4, nickname: 'diana', joinedAt: new Date(), score: 0 },
+        { id: 5, nickname: 'eve', joinedAt: new Date(), score: 0 }
     ];
     
     const playerCountSpan = document.getElementById('playerCount');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     //генерация кода комнаты
     function generateRoomCode() {
-        return Math.floor(100000 + Math.random() * 900000).toString();
+        return Math.floor(100000 + Math.random()  * 900000).toString();
     }
 
     //добавление игрока
@@ -33,7 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const player = {
             id: Date.now() + Math.random(),
             nickname: nickname || `player_${players.length + 1}`,
-            joinedAt: new Date()
+            joinedAt: new Date(),
+            score: 0
         };
         
         players.push(player);
@@ -91,8 +92,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        //сохоанение списока игроков
-        sessionStorage.setItem('gamePlayers', JSON.stringify(players));
+        //сохранение списка игроков с начальными очками (0)
+        const playersForGame = players.map(p => ({
+            id: p.id,
+            nickname: p.nickname,
+            score: 0
+        }));
+        
+        sessionStorage.setItem('gamePlayers', JSON.stringify(playersForGame));
         sessionStorage.setItem('isAdmin', 'true');
         
         //переходим к первому вопросу

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard · Quiz Results</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body class="lobby-page">
+    <main class="lobby-container">
+        <header class="lobby-header">
+            <h1 class="lobby-title">leaderboard</h1>
+        </header>
+
+        <section class="players-section">
+            <div class="section-header">
+                <h2 class="section-title">ranking</h2>
+                <span class="player-count" id="playerCount">0</span>
+            </div>
+
+            <div class="players-list" id="playersList">
+                <!-- игроки будут добавлены динамически -->
+            </div>
+        </section>
+
+        <footer class="lobby-footer">
+            <a href="host_lobby.html" class="btn btn-primary btn-block">new game</a>
+            <a href="join.html" class="btn btn-secondary btn-block">leave</a>
+        </footer>
+    </main>
+
+    <script>
+        // Получение статуса по месту
+        function getStatusStyle(rank) {
+            if (rank === 1) return { color: "#d4af37", text: "★ 1st place" };
+            if (rank === 2) return { color: "#a0a0a0", text: "★ 2nd place" };
+            if (rank === 3) return { color: "#cd7f32", text: "★ 3rd place" };
+            return { color: "#666", text: rank + "th place" };
+        }
+
+        // Получение первой буквы для аватарки
+        function getAvatarLetter(name) {
+            return name.charAt(0).toUpperCase();
+        }
+
+        // Защита от XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Основная функция отрисовки лидерборда
+        function renderLeaderboard(players) {
+            // Сортировка по очкам (по убыванию)
+            const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
+            
+            // Обновление счетчика
+            const playerCountSpan = document.getElementById('playerCount');
+            playerCountSpan.textContent = sortedPlayers.length;
+            
+            const playersListContainer = document.getElementById('playersList');
+            
+            if (sortedPlayers.length === 0) {
+                playersListContainer.innerHTML = `
+                    <div class="empty-state">
+                        <p>no players in game</p>
+                        <p class="empty-hint">start a new game to see results</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            playersListContainer.innerHTML = '';
+            
+            sortedPlayers.forEach((player, index) => {
+                const rank = index + 1;
+                const statusStyle = getStatusStyle(rank);
+                const avatarLetter = getAvatarLetter(player.nickname || player.name || '?');
+                const scoreValue = player.score || 0;
+                
+                const playerItem = document.createElement('div');
+                playerItem.className = 'player-item';
+                
+                playerItem.innerHTML = `
+                    <div class="player-info">
+                        <div class="player-avatar">${avatarLetter}</div>
+                        <div>
+                            <div class="player-name">${escapeHtml(player.nickname || player.name || 'Anonymous')}</div>
+                            <div class="player-status" style="color: ${statusStyle.color};">${statusStyle.text}</div>
+                        </div>
+                    </div>
+                    <div class="player-score" style="font-weight: 700; font-family: 'Courier New', monospace;">${scoreValue}</div>
+                `;
+                
+                playersListContainer.appendChild(playerItem);
+            });
+        }
+
+        // Загрузка данных при открытии страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Получаем игроков из sessionStorage
+            const storedPlayers = sessionStorage.getItem('gamePlayers');
+            const finalScores = sessionStorage.getItem('finalScores');
+            
+            let players = [];
+            
+            if (storedPlayers) {
+                players = JSON.parse(storedPlayers);
+            }
+            
+            // Если есть финальные очки применяем их
+            if (finalScores) {
+                const scores = JSON.parse(finalScores);
+                players = players.map(player => ({
+                    ...player,
+                    score: scores[player.id] || player.score || 0
+                }));
+            }
+            
+            // Если игроков нет в sessionStorage, показываем тестовые данные
+            if (players.length === 0) {
+                // Тестовые данные 
+                players = [
+                    { id: 1, nickname: "Alice", score: 1250 },
+                    { id: 2, nickname: "Bob", score: 980 },
+                    { id: 3, nickname: "Charlie", score: 870 },
+                    { id: 4, nickname: "Diana", score: 650 },
+                    { id: 5, nickname: "Dve", score: 540 },
+                ];
+            }
+            
+            renderLeaderboard(players);
+        });
+    </script>
+</body>
+</html>

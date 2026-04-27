@@ -779,3 +779,184 @@
         padding: 1rem;
     }
 }
+
+/* ===== Стили для страницы лидерборда ===== */
+
+.leaderboard-page {
+    background: #f5f5f5;
+}
+
+.leaderboard-container {
+    max-width: 700px;
+    width: 100%;
+    background: #ffffff;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Заголовок */
+.leaderboard-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #000000;
+}
+
+.leaderboard-title {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    color: #000000;
+    margin-bottom: 1rem;
+}
+
+.quiz-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    padding: 0.6rem 1.2rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: lowercase;
+    color: #666;
+}
+
+.stat-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #000000;
+}
+
+/* Таблица лидеров */
+.leaderboard-section {
+    margin-bottom: 2rem;
+}
+
+.leaderboard-table {
+    border: 1px solid #e0e0e0;
+    background: #ffffff;
+}
+
+.leaderboard-header-row {
+    display: grid;
+    grid-template-columns: 70px 1fr 100px;
+    background: #000000;
+    color: #ffffff;
+    padding: 0.8rem 1rem;
+    font-weight: 600;
+    text-transform: lowercase;
+    border-bottom: 2px solid #000000;
+}
+
+.rank-col {
+    text-align: center;
+}
+
+.player-col {
+    text-align: left;
+}
+
+.score-col {
+    text-align: right;
+}
+
+.leaderboard-list {
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+/* Строка игрока в лидерборде */
+.leaderboard-row {
+    display: grid;
+    grid-template-columns: 70px 1fr 100px;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #e0e0e0;
+    transition: background 0.15s ease;
+}
+
+.leaderboard-row:hover {
+    background: #fafafa;
+}
+
+.leaderboard-row.top-three {
+    background: #fff8e7;
+}
+
+.leaderboard-rank {
+    text-align: center;
+    font-weight: 600;
+}
+
+.leaderboard-rank.gold {
+    color: #d4af37;
+}
+.leaderboard-rank.silver {
+    color: #a0a0a0;
+}
+.leaderboard-rank.bronze {
+    color: #cd7f32;
+}
+
+.leaderboard-name {
+    text-align: left;
+    font-weight: 500;
+}
+
+.leaderboard-score {
+    text-align: right;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+/* Пустое состояние */
+.empty-state-leaderboard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    text-align: center;
+    color: #999;
+    text-transform: lowercase;
+}
+
+/* Футер лидерборда */
+.leaderboard-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* Адаптивность */
+@media (max-width: 500px) {
+    .leaderboard-container {
+        padding: 1.5rem;
+    }
+    
+    .leaderboard-header-row,
+    .leaderboard-row {
+        grid-template-columns: 50px 1fr 80px;
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .rank-col, .leaderboard-rank {
+        font-size: 0.9rem;
+    }
+    
+    .score-col, .leaderboard-score {
+        font-size: 0.9rem;
+    }
+}
