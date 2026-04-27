@@ -12,6 +12,7 @@ class Question:
         if "answered" in self.question:
             return False
         self.question["answered"] = int(answer)
+        self.expiration_date = time.monotonic()
         return self.question["answered"] == self.question["correct"]
 
     def get(self):
