@@ -1,9 +1,6 @@
-import {clientCreateGame, clientJoinGame} from "/js/api_client.js";
+import {clientCreateGame, clientJoinGame} from "/js/tools/api_client.js";
 
-// clear sessionStorage
-document.addEventListener('DOMContentLoaded', () => {
-    sessionStorage.clear()
-})
+sessionStorage.clear()
 
 //валидация для страницы входа
 
@@ -53,9 +50,10 @@ form.addEventListener('submit', async function(e) {
 
         //сохраняем данные в sessionStorage для использования на других страницах
         sessionStorage.setItem('playerNickname', nickname);
-        if (document.activeElement.textContent === "join")
+        if (document.activeElement.textContent === "join") {
             sessionStorage.setItem('roomNumber', roomNumber)
-        else {
+            sessionStorage.setItem('isAdmin', false)
+        } else {
             sessionStorage.setItem('roomNumber', response.room_number)
             sessionStorage.setItem('isAdmin', true)
         }
