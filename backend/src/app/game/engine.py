@@ -14,7 +14,7 @@ class Engine:
         if room_id not in self.rooms:
             raise JoinError("There is no such game")
         room_to_be_joined_to = self.rooms[room_id]
-        if room_to_be_joined_to.started:
+        if room_to_be_joined_to.state:
             raise JoinError("The game has been already started")
         if nickname in room_to_be_joined_to.get_player_nicknames():
             raise JoinError("Joined already")
@@ -67,6 +67,14 @@ class Engine:
         room_id = self.room_id_process(room_id)
         self.token_process(player_session_token, room_id)
         return self.rooms[room_id].get_results()
+
+    def get_room_players_and_status(self, player_session_token, room_id):
+        room_id = self.room_id_process(room_id)
+        self.token_process(player_session_token, room_id)
+        return {
+            "players": self.rooms[room_id].get_player_nicknames(),
+            "status": self.rooms[room_id].state
+        }
 
 
 game_engine = Engine()

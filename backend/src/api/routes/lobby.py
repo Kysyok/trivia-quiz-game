@@ -5,6 +5,16 @@ from app.game.exceptions import StartError, RoomError, SessionError
 lobby_router = SlowAPIRouter("Lobby")
 
 
+@lobby_router.route("/players")
+async def get_players(player_session_token, room_id):
+    try:
+        players_and_status = game_engine.get_room_players_and_status(player_session_token, room_id)
+    except StartError as error:
+        return {"error": error.message}
+
+    return players_and_status
+
+
 @lobby_router.route("/start")
 async def start_game(player_session_token, room_id, questions_per_player):
     try:
