@@ -37,6 +37,8 @@ class Room:
         if not (player := self.get_player_by_token(player_session_token)):
             raise SessionError("Player session tokens mismatch")
         self.players.remove(player)
+        if not self.players:
+            raise RoomError("The room is empty")
         if self.host_session_token == player_session_token:
             self.host_session_token = self.players[0].session_token
 

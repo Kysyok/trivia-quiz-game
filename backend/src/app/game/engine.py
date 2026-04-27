@@ -48,10 +48,11 @@ class Engine:
 
     def remove_player_from_room(self, player_session_token, room_id):
         room_id = self.room_id_process(room_id)
-        self.rooms[room_id].remove_player(player_session_token)
-        if not self.rooms[room_id].players:
+        try:
+            self.rooms[room_id].remove_player(player_session_token)
+        except RoomError as exception:
             del self.rooms[room_id]
-            raise RoomError("No players left")
+            raise exception
 
     def get_next_question(self, player_session_token, room_id):
         room_id = self.room_id_process(room_id)
