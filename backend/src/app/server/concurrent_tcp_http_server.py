@@ -34,7 +34,12 @@ class ConcurrentTCPHTTPServer:
     async def serve_request_from(self, client_socket):
         packet = await self.asyncio_loop.sock_recv(client_socket, self.buffer_byte_size)
         endpoint, arguments, origin = self.packer.extract_endpoint_arguments_and_origin(packet)
+        logger.info(f"Request from {(n := client_socket.getsockname())[0]}:{n[1]} to {endpoint}"
+                    f"({", ".join(f"{elem[0]}={elem[1]}" for elem in arguments.items())})")
+
         serve_result = await self.router[endpoint](**arguments)
+        logger.info(f"Response to {(n := client_socket.getsockname())[0]}:{n[1]} — {serve_result}")
+
         self.send_response_and_forget(client_socket, serve_result, origin)
 
     def send_response_and_forget(self, client_socket, json_body, allowed_origin=None):
