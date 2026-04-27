@@ -1,0 +1,11 @@
+# use --force-recreate flag in case of problems with compose up
+
+services:
+  website:
+    image: nginx:latest
+    container_name: trivial
+    restart: always
+    volumes:
+      - ./public:/usr/share/nginx/html  # host/folder:container/folder
+    ports:
+      - 80:80  # computer-port:container-port(exposed)
