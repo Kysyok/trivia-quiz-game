@@ -24,3 +24,11 @@ export async function clientCreateGame(nickname) {
     })
     return await response.json();
 }
+
+export async function clientPlayersAndStatus(playerSessionToken, roomId) {
+    const response = await formFetch("/players", {
+        "player_session_token": playerSessionToken,
+        "room_id": roomId
+    })
+    return await response.json();
+}

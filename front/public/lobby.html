@@ -11,7 +11,7 @@
     <main class="player-lobby-container">
         <!-- Заголовок -->
         <header class="player-lobby-header">
-            <h1 class="player-lobby-title">waiting for game</h1>
+            <h1 id="displayRoom" class="player-lobby-title">Room X</h1>
         </header>
 
         <!-- Информация о игроке и комнате -->
@@ -19,10 +19,6 @@
             <div class="info-row">
                 <span class="info-label">player</span>
                 <span class="info-value" id="displayNickname">Player</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">room</span>
-                <span class="info-value room-code-display" id="displayRoom">000000</span>
             </div>
         </div>
 
@@ -42,30 +38,6 @@
         </footer>
     </main>
 
-    <script src="js/main.js"></script>
-    <script>
-        // Получаем данные из sessionStorage
-        const nickname = sessionStorage.getItem('playerNickname') || 'Player';
-        const roomNumber = sessionStorage.getItem('roomNumber') || '000000';
-        
-        // Отображаем данные
-        document.getElementById('displayNickname').textContent = nickname;
-        document.getElementById('displayRoom').textContent = roomNumber;
-        
-        // Проверяем статус игры 
-        // Для демо перенаправление на игру через 5 секунд
-        setTimeout(() => {
-            // Проверяем, не началась ли игра
-            const gameStarted = sessionStorage.getItem('gameStarted');
-            if (gameStarted === 'true') {
-                window.location.href = 'quiz.html';
-            }
-        }, 1000);
-        
-        // для очстки данных при уходе со страницы
-        window.addEventListener('beforeunload', function() {
-
-        });
-    </script>
+    <script type="module" src="js/lobby.js"></script>
 </body>
 </html>
