@@ -15,7 +15,9 @@ class Question:
         return self.question["answered"] == self.question["correct"]
 
     def get(self):
-        if condition_1 := time.monotonic() < self.expiration_date + self.gap_time:
+        if not self.question:
+            return None
+        if condition_1 := time.monotonic() > self.expiration_date + self.gap_time:
             return None
         if "answered" in self.question and condition_1:
             return self.question
