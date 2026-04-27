@@ -31,7 +31,7 @@ function checkAuth() {
     const isAdmin = sessionStorage.getItem('isAdmin') === 'true';
     
     if (!nickname && !isAdmin) {
-        window.location.href = 'index.html';
+        window.location.href = 'join.html';
         return false;
     }
     return true;
@@ -40,7 +40,7 @@ function checkAuth() {
 //обработчик для кнопки leave lobby
 document.addEventListener('click', function(e) {
     if (e.target.classList.contains('btn-leave') || 
-        (e.target.tagName === 'A' && e.target.href.includes('index.html'))) {
+        (e.target.tagName === 'A' && e.target.href.includes('join.html'))) {
         clearPlayerData();
     }
 });
