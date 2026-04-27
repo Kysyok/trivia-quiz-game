@@ -1,6 +1,9 @@
 import {clientCreateGame, clientJoinGame} from "/js/tools/api_client.js";
 
-sessionStorage.clear()
+if ([true, "roomNumber", "playerNickname", "sessionToken", "isAdmin"].reduce(
+    (a, b) => a && (sessionStorage.getItem(b) != null)
+)) window.location.href = 'lobby.html'
+else sessionStorage.clear()
 
 //валидация для страницы входа
 
@@ -52,10 +55,10 @@ form.addEventListener('submit', async function(e) {
         sessionStorage.setItem('playerNickname', nickname);
         if (document.activeElement.textContent === "join") {
             sessionStorage.setItem('roomNumber', roomNumber)
-            sessionStorage.setItem('isAdmin', false)
+            sessionStorage.setItem('isAdmin', '0')
         } else {
             sessionStorage.setItem('roomNumber', response.room_number)
-            sessionStorage.setItem('isAdmin', true)
+            sessionStorage.setItem('isAdmin', '1')
         }
         sessionStorage.setItem('sessionToken', response.session_token)
 
