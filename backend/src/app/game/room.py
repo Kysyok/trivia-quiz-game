@@ -70,7 +70,6 @@ class Room:
 
     def get_question(self):
         self.raise_not_started_exception()
-        self.raise_started_exception()
         question = self.question.get()
         if not question:
             self.players_rotation()
