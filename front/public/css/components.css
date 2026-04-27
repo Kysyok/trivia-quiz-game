@@ -55,6 +55,10 @@
     border: 2px solid #000;
 }
 
+.disappeared {
+    display: none !important;
+}
+
 .btn-primary:hover,
 .btn-primary:focus-visible {
     background-color: #fff;
@@ -98,7 +102,7 @@
 
 .text-input:focus {
     outline: 2px solid #000000;
-    outline-offset: 0px;
+    outline-offset: 0;
 }
 
 .text-input::placeholder {
