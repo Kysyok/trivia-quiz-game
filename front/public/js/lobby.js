@@ -1,6 +1,5 @@
 import {syncTimeout} from "/js/tools/mixed.js";
 
-//управление лобби
 
 // redirection to the join page if sessionStorage is incomplete
 import {clientLeaveGame, clientPlayersAndStatus, clientStartGame} from "/js/tools/api_client.js";

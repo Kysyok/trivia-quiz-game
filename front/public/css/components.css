@@ -1,5 +1,3 @@
-/* кнопки инпуты и тд */
-/* поля ввода */
 .text-input {
     width: 100%;
     padding: 0.9rem 1rem;
@@ -48,7 +46,6 @@
     width: 100%;
 }
 
-/* основная кнопка join */
 .btn-primary {
     background-color: #000;
     color: #fff;
@@ -71,7 +68,6 @@
     outline: none;
 }
 
-/* Вторичная кнопка (create game) */
 .btn-secondary {
     background-color: #fff;
     color: #000;
@@ -85,16 +81,12 @@
     outline: none;
 }
 
-/* Активное состояние для обеих */
 .btn:active {
     transform: scale(0.98);
 }
 
 
-/* ДЛЯ ИНПУТОВ */
-/* css/components.css */
 
-/* Стили для инпутов */
 .text-input {
     width: 100%;
     padding: 0.9rem 1rem;
@@ -115,7 +107,6 @@
     text-transform: lowercase;
 }
 
-/* Стиль для ошибки */
 .text-input.error {
     border-color: #ff0000 !important;
     border-width: 2px;
@@ -126,7 +117,6 @@
     outline-color: #ff0000;
 }
 
-/* Кнопки */
 .btn {
     display: inline-block;
     width: 100%;
@@ -190,7 +180,6 @@
 
 
 
-/* ===== Стили для страницы лобби ===== */
 
 .lobby-page {
     background: #f5f5f5;
@@ -205,7 +194,6 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-/* Заголовок лобби */
 .lobby-header {
     text-align: center;
     margin-bottom: 2.5rem;
@@ -246,7 +234,6 @@
     border: 2px solid #000000;
 }
 
-/* Секция с игроками */
 .players-section {
     margin-bottom: 2.5rem;
 }
@@ -276,7 +263,6 @@
     border-radius: 0;
 }
 
-/* Список игроков */
 .players-list {
     min-height: 300px;
     max-height: 400px;
@@ -285,7 +271,6 @@
     padding: 0.5rem;
 }
 
-/* Карточка игрока */
 .player-item {
     display: flex;
     align-items: center;
@@ -344,7 +329,6 @@
     color: #00aa00;
 }
 
-/* Кнопка удаления игрока */
 .btn-remove {
     width: 32px;
     height: 32px;
@@ -366,7 +350,6 @@
     border-color: #ff0000;
 }
 
-/* Пустое состояние */
 .empty-state {
     display: flex;
     flex-direction: column;
@@ -394,7 +377,6 @@
     color: #aaa;
 }
 
-/* Футер лобби */
 .lobby-footer {
     display: flex;
     flex-direction: column;
@@ -445,7 +427,6 @@
 
 
 
-/* ===== Стили для лобби игрока ===== */
 
 .player-lobby-page {
     background: #f5f5f5;
@@ -461,7 +442,6 @@
     text-align: center;
 }
 
-/* Заголовок */
 .player-lobby-header {
     margin-bottom: 2.5rem;
     padding-bottom: 1.5rem;
@@ -475,7 +455,6 @@
     color: #000000;
 }
 
-/* Информация о игроке и комнате */
 .player-room-info {
     margin-bottom: 3rem;
     padding: 1.5rem;
@@ -514,7 +493,6 @@
     font-weight: 700;
 }
 
-/* Индикатор ожидания */
 .waiting-indicator {
     margin-bottom: 3rem;
 }
@@ -559,7 +537,6 @@
     text-transform: lowercase;
 }
 
-/* Футер */
 .player-lobby-footer {
     margin-top: 2rem;
 }

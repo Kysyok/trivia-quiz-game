@@ -11,11 +11,11 @@ const form = document.querySelector('.join-form');
 const roomInput = document.getElementById('roomNumber');
 const nicknameInput = document.getElementById('nickname');
 
-//функция проверки пустых полей
+//validation function
 function validateForm() {
     let isValid = true;
 
-    //проверка поля room number
+    //room number field validation
     if (document.activeElement.textContent === "join" && !roomInput.value.trim()) {
         roomInput.classList.add('error');
         isValid = false;
@@ -23,7 +23,7 @@ function validateForm() {
         roomInput.classList.remove('error');
     }
 
-    //проверка поля nickname
+    //nickname field
     if (!nicknameInput.value.trim()) {
         nicknameInput.classList.add('error');
         isValid = false;
@@ -34,12 +34,10 @@ function validateForm() {
     return isValid;
 }
 
-//обработка отправки формы
 form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
     if (validateForm()) {
-        //если поля заполнены значит перенаправляем в лобби игрока
         const roomNumber = roomInput.value.trim();
         const nickname = nicknameInput.value.trim();
 
@@ -49,7 +47,6 @@ form.addEventListener('submit', async function(e) {
             return
         }
 
-        //сохраняем данные в sessionStorage для использования на других страницах
         sessionStorage.setItem('playerNickname', nickname);
         if (document.activeElement.textContent === "join") {
             sessionStorage.setItem('roomNumber', roomNumber)
@@ -60,12 +57,11 @@ form.addEventListener('submit', async function(e) {
         }
         sessionStorage.setItem('sessionToken', response.session_token)
 
-        //перенаправление на страницу ожидания
+        //roud to waiting page
         window.location.href = 'lobby.html';
     }
 });
 
-//убираем красную подсветку при вводе
 roomInput.addEventListener('input', function() {
     if (this.value.trim()) {
         this.classList.remove('error');
@@ -78,7 +74,6 @@ nicknameInput.addEventListener('input', function() {
     }
 });
 
-//только цифры для номера комнаты
 roomInput.addEventListener('input', function() {
     this.value = this.value.replace(/\D/g, '').slice(0, 6);
 });
