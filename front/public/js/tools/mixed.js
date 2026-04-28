@@ -1,3 +1,6 @@
+export const syncTimeout = 250
+export const reasoningTime = 20
+
 export function redirectIfUnstarted(status) {
     if (status) {
         sessionStorage.setItem("questionsCount", status)

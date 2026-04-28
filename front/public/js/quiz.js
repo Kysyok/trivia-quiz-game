@@ -1,4 +1,5 @@
 import {answerQuestion, clientNextQuestion} from "/js/tools/api_client.js";
+import {syncTimeout, reasoningTime} from "/js/tools/mixed.js";
 
 if (![true, "roomNumber", "playerNickname", "sessionToken", "isAdmin", "questionsCount"].reduce(
     (a, b) => a && (sessionStorage.getItem(b) != null)
@@ -49,7 +50,18 @@ function setAnswered(answered, correct) {
         }
     }
 }
-
+let fakeTimer = reasoningTime
+function timerLoop() {
+    timerText.textContent = `${fakeTimer}s`
+    timerProgress.style.width = `${(fakeTimer / 20) * 100}%`
+    if (fakeTimer <= 5)
+        timerProgress.classList.add('warning')
+    else
+        timerProgress.classList.remove('warning')
+    fakeTimer = Math.max(0, fakeTimer - 1)
+    setTimeout(timerLoop, 1000)
+}
+timerLoop()
 async function quizLoop() {
     let time = performance.now()
     const response = await clientNextQuestion(sessionStorage.getItem("sessionToken"), sessionStorage.getItem("roomNumber"))
@@ -61,17 +73,14 @@ async function quizLoop() {
     currentPlayerSpan.textContent = response.answering
     options.forEach((option, i) => option.textContent = response.question.options[i])
 
-    const timeLeft = Math.round(parseFloat(response.time) - time / 2000)
-    if (timeLeft <= 5)
-        timerProgress.classList.add('warning')
-    else
-        timerProgress.classList.remove('warning')
-    timerText.textContent = `${timeLeft}s`
-    timerProgress.style.width = `${(timeLeft / 20) * 100}%`
+    const timeLeft = Math.max(0, parseFloat(response.time) - time / 2 / 1000)
+    if (Math.abs(timeLeft - fakeTimer) >= 1) {
+        fakeTimer = Math.round(timeLeft)
+    }
 
     setAnswered(response.question.answered, response.question.correct)
 
-    setTimeout(quizLoop, 1000)
+    setTimeout(quizLoop, syncTimeout)
 }
 quizLoop()
 

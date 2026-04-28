@@ -1,3 +1,5 @@
+import {syncTimeout} from "/js/tools/mixed.js";
+
 //управление лобби
 
 // redirection to the join page if sessionStorage is incomplete
@@ -40,7 +42,7 @@ async function playerListUpdateCycle() {
         informationRow.appendChild(playerName)
         playersTable.appendChild(informationRow)
     }
-    setTimeout(playerListUpdateCycle, 1000)
+    setTimeout(playerListUpdateCycle, syncTimeout)
 }
 playerListUpdateCycle()
 
