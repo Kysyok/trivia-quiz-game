@@ -13,7 +13,9 @@ const options = document.querySelectorAll(".answer-text")
 const timerProgress = document.getElementById('timerProgress')
 const timerText = document.getElementById('timerText')
 const questionCounter = document.querySelector(".question-number")
-questionCounter.textContent = `question 0 / ${sessionStorage.getItem("questionsCount")}`
+if (sessionStorage.getItem("questionNumber") === null)
+    sessionStorage.setItem("questionNumber", "0")
+questionCounter.textContent = `question ${sessionStorage.getItem("questionNumber")} / ${sessionStorage.getItem("questionsCount")}`
 
 function setVariantsVisibility(isAnswering) {
     if (isAnswering) {
@@ -28,9 +30,8 @@ let doOnce = true
 function setAnswered(answered, correct) {
     if (answered === undefined) {
         if (doOnce) {
-            questionCounter.textContent =
-                `question ${parseInt(questionCounter.textContent.split(' ')[1]) + 1} / 
-                ${sessionStorage.getItem("questionsCount")}`
+            sessionStorage.setItem("questionNumber", `${parseInt(sessionStorage.getItem("questionNumber")) + 1}`)
+            questionCounter.textContent = `question ${sessionStorage.getItem("questionNumber")} / ${sessionStorage.getItem("questionsCount")}`
             doOnce = false
         }
         options.forEach((option) => {
@@ -68,6 +69,7 @@ async function quizLoop() {
     if (response.error?.includes("No more"))
         window.location.href = 'leader_board.html'
     if (response.error) {
+        setTimeout(quizLoop, syncTimeout)
         return
     }
     time = performance.now() - time

@@ -25,6 +25,7 @@ async function playerListUpdateCycle() {
         sessionStorage.getItem("sessionToken"),
         sessionStorage.getItem("roomNumber"))
     if (playersAndStatus.error) {
+        setTimeout(playerListUpdateCycle, syncTimeout)
         return
     }
     redirectIfUnstarted(playersAndStatus.status)
