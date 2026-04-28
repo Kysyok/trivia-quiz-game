@@ -59,6 +59,11 @@
     display: none !important;
 }
 
+.disappeared_semi {
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+}
+
 .btn-primary:hover,
 .btn-primary:focus-visible {
     background-color: #fff;
@@ -719,6 +724,24 @@
 .answer-btn.selected {
     background: #000000;
     color: #ffffff;
+}
+
+.answer-btn_selected {
+    background: #000000;
+    color: #ffffff;
+    pointer-events: none;
+}
+
+.answer-btn_correct {
+    background: #6fdd74;
+    color: #000000;
+    pointer-events: none;
+}
+
+.answer-btn_incorrect {
+    background: #e66e69;
+    color: #000000;
+    pointer-events: none;
 }
 
 .answer-marker {

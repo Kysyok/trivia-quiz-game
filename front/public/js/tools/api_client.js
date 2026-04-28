@@ -10,42 +10,72 @@ function formFetch(endpoint, jsonBody) {
 }
 
 
+function writeErrors(response) {
+    if (response.error)
+        console.log(response.error)
+}
+
+
 export async function clientJoinGame(roomId, nickname) {
-    const response = await formFetch("/join", {
+    let response = await formFetch("/join", {
         "room_id": roomId,
         "nickname": nickname
     })
-    return await response.json();
+    response = await response.json(); writeErrors(response)
+    return response;
 }
 
 export async function clientLeaveGame(playerSessionToken, roomId) {
-    const response = await formFetch("/leave", {
+    let response = await formFetch("/leave", {
         "player_session_token": playerSessionToken,
         "room_id": roomId
     })
-    return await response.json();
+    response = await response.json(); writeErrors(response)
+    return response;
 }
 
-export async function clientStartGame(playerSessionToken, roomId, questionsPerPlayer=15) {
-    const response = await formFetch("/start", {
+export async function clientStartGame(playerSessionToken, roomId, questionsPerPlayer=5) {
+    let response = await formFetch("/start", {
         "player_session_token": playerSessionToken,
         "room_id": roomId,
         "questions_per_player": questionsPerPlayer
     })
-    return await response.json();
+    response = await response.json(); writeErrors(response)
+    return response;
 }
 
 export async function clientCreateGame(nickname) {
-    const response = await formFetch("/create", {
+    let response = await formFetch("/create", {
         "nickname": nickname
     })
-    return await response.json();
+    response = await response.json(); writeErrors(response)
+    return response;
 }
 
 export async function clientPlayersAndStatus(playerSessionToken, roomId) {
-    const response = await formFetch("/players", {
+    let response = await formFetch("/players", {
         "player_session_token": playerSessionToken,
         "room_id": roomId
     })
-    return await response.json();
+    response = await response.json(); writeErrors(response)
+    return response;
+}
+
+export async function clientNextQuestion(playerSessionToken, roomId) {
+    let response = await formFetch("/next", {
+        "player_session_token": playerSessionToken,
+        "room_id": roomId
+    })
+    response = await response.json(); writeErrors(response)
+    return response;
+}
+
+export async function answerQuestion(playerSessionToken, roomId, optionIndex) {
+    let response = await formFetch("/answer", {
+        "player_session_token": playerSessionToken,
+        "room_id": roomId,
+        "answer": optionIndex
+    })
+    response = await response.json(); writeErrors(response)
+    return response;
 }
