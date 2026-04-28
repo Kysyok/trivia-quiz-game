@@ -3,7 +3,7 @@ import copy
 
 
 class Question:
-    def __init__(self, question, reasoning_time=20, gap_time=5):
+    def __init__(self, question, reasoning_time=20, gap_time=3):
         self.question = question
         self.expiration_date = time.monotonic() + reasoning_time
         self.gap_time = gap_time
@@ -28,3 +28,6 @@ class Question:
         question = copy.deepcopy(self.question)
         del question["correct"]
         return self.question
+
+    def time_left(self):
+        return max(0, self.expiration_date - time.monotonic())
