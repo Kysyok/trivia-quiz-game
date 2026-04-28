@@ -5,6 +5,7 @@ from app.game.exceptions import StartError, SessionError, RoomError
 from app.game.player import Player
 from app.game.question import Question
 from app.game.questions import QUESTIONS
+from copy import deepcopy
 
 
 class Room:
@@ -80,7 +81,7 @@ class Room:
         if not question:
             self.players_rotation()
             try:
-                self.question = Question(self.questions.pop())
+                self.question = Question(deepcopy(self.questions.pop()))
             except IndexError:
                 raise RoomError("No more questions")
             question = self.question.get()
