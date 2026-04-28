@@ -26,13 +26,14 @@ function setVariantsVisibility(isAnswering) {
         answersContainer.classList.add('disappeared_semi');
     }
 }
-let doOnce = true
+if (sessionStorage.getItem("doOnce") === null)
+    sessionStorage.setItem("doOnce", "true")
 function setAnswered(answered, correct) {
     if (answered === undefined) {
-        if (doOnce) {
+        if (sessionStorage.getItem("doOnce") === "true") {
             sessionStorage.setItem("questionNumber", `${parseInt(sessionStorage.getItem("questionNumber")) + 1}`)
             questionCounter.textContent = `question ${sessionStorage.getItem("questionNumber")} / ${sessionStorage.getItem("questionsCount")}`
-            doOnce = false
+            sessionStorage.setItem("doOnce", "false")
         }
         options.forEach((option) => {
             option.parentElement.classList.remove("answer-btn_correct")
@@ -40,7 +41,7 @@ function setAnswered(answered, correct) {
             option.parentElement.classList.remove('answer-btn_selected');
         })
     } else {
-        doOnce = true
+        sessionStorage.setItem("doOnce", "true")
         if (answered === correct) {
             options[parseInt(correct)].parentElement.classList.add("answer-btn_correct")
         } else {
