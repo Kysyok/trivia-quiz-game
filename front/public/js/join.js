@@ -46,7 +46,6 @@ form.addEventListener('submit', async function(e) {
         const response = document.activeElement.textContent === "join" ?
             await clientJoinGame(roomNumber, nickname) : await clientCreateGame(nickname)
         if (response.error) {
-            console.log(`Error! ${response.error}`)
             return
         }
 

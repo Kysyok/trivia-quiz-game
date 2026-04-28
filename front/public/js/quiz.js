@@ -11,6 +11,8 @@ const currentPlayerSpan = document.getElementById('currentPlayer')
 const options = document.querySelectorAll(".answer-text")
 const timerProgress = document.getElementById('timerProgress')
 const timerText = document.getElementById('timerText')
+const questionCounter = document.querySelector(".question-number")
+questionCounter.textContent = `question 0 / ${sessionStorage.getItem("questionsCount")}`
 
 function setVariantsVisibility(isAnswering) {
     if (isAnswering) {
@@ -21,14 +23,22 @@ function setVariantsVisibility(isAnswering) {
         answersContainer.classList.add('disappeared_semi');
     }
 }
+let doOnce = true
 function setAnswered(answered, correct) {
     if (answered === undefined) {
+        if (doOnce) {
+            questionCounter.textContent =
+                `question ${parseInt(questionCounter.textContent.split(' ')[1]) + 1} / 
+                ${sessionStorage.getItem("questionsCount")}`
+            doOnce = false
+        }
         options.forEach((option) => {
             option.parentElement.classList.remove("answer-btn_correct")
             option.parentElement.classList.remove("answer-btn_incorrect")
             option.parentElement.classList.remove('answer-btn_selected');
         })
     } else {
+        doOnce = true
         if (answered === correct) {
             options[parseInt(correct)].parentElement.classList.add("answer-btn_correct")
         } else {
