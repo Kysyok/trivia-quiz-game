@@ -1,4 +1,6 @@
+import asyncio
 import random
+import time
 
 from app.game.exceptions import JoinError, StartError, RoomError, SessionError
 from app.game.room import Room
@@ -8,6 +10,8 @@ class Engine:
     def __init__(self):
         self.rooms = dict()
         self.rooms_id_range = [100_000, 1_000_000]
+        self.room_delete_tasks = set()
+        self.room_expiration_time = 3600 / 2
 
     def create_player_in_room(self, room_id, nickname):
         room_id = int(room_id)
@@ -20,12 +24,24 @@ class Engine:
             raise JoinError("Joined already")
         return room_to_be_joined_to.add_player(nickname)
 
+    async def delete_expired_room(self, room_id):
+        await asyncio.sleep(self.room_expiration_time)
+        if time.monotonic() - self.rooms[room_id].last_accessed_time >= self.room_expiration_time:
+            del self.rooms[room_id]
+            return
+        task = asyncio.create_task(self.delete_expired_room(room_id))
+        task.add_done_callback(lambda t: self.room_delete_tasks.discard(t))
+        self.room_delete_tasks.add(task)
+
     def create_room(self, nickname):
         while (room_id := random.randrange(*self.rooms_id_range)) in self.rooms:
             continue
         self.rooms[room_id] = Room()
         host_session_token = self.rooms[room_id].add_player(nickname)
         self.rooms[room_id].host_session_token = host_session_token
+        task = asyncio.create_task(self.delete_expired_room(room_id))
+        task.add_done_callback(lambda t: self.room_delete_tasks.discard(t))
+        self.room_delete_tasks.add(task)
         return room_id, host_session_token
 
     def room_id_process(self, room_id):

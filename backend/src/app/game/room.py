@@ -14,8 +14,10 @@ class Room:
         self.questions = list()
         self.question = Question(None)
         self.state = None  # None = not started, questions per player = started, False = finished
+        self.last_accessed_time = time.monotonic()
 
     def choose_questions(self, questions_per_player):
+        self.last_accessed_time = time.monotonic()
         self.questions = random.sample(QUESTIONS, k=len(self.players) * int(questions_per_player))
 
     def raise_started_exception(self):
@@ -27,12 +29,14 @@ class Room:
             raise StartError(f"The room is {"not started yet" if self.state is None else "finished"}")
 
     def add_player(self, nickname):
+        self.last_accessed_time = time.monotonic()
         self.raise_started_exception()
         player = Player(nickname)
         self.players.append(player)
         return player.session_token
 
     def remove_player(self, player_session_token):
+        self.last_accessed_time = time.monotonic()
         self.raise_started_exception()
         if not (player := self.get_player_by_token(player_session_token)):
             raise SessionError("Player session tokens mismatch")
@@ -60,6 +64,7 @@ class Room:
         self.players[0].answering = True
 
     def start(self, questions_per_player):
+        self.last_accessed_time = time.monotonic()
         self.raise_started_exception()
         self.choose_questions(questions_per_player)
         self.state = len(self.questions)
@@ -69,6 +74,7 @@ class Room:
         }
 
     def get_question(self):
+        self.last_accessed_time = time.monotonic()
         self.raise_not_started_exception()
         question = self.question.get()
         if not question:
@@ -85,6 +91,7 @@ class Room:
         }
 
     def propose_answer(self, player_session_token, answer):
+        self.last_accessed_time = time.monotonic()
         self.raise_not_started_exception()
         if not self.get_player_by_token(player_session_token).answering:
             raise RoomError("You are not answering")
@@ -92,4 +99,5 @@ class Room:
         return self.question.get()
 
     def get_results(self):
+        self.last_accessed_time = time.monotonic()
         return {player.nickname: player.score for player in self.players}
