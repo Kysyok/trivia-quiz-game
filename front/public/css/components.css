@@ -336,6 +336,10 @@
     text-transform: lowercase;
 }
 
+.player-score {
+    font-weight: 700; font-family: 'Courier New', monospace;
+}
+
 .player-status.ready {
     color: #00aa00;
 }
@@ -742,6 +746,22 @@
     background: #e66e69;
     color: #000000;
     pointer-events: none;
+}
+
+.first-place {
+    color: #d4af37;
+}
+
+.second-place {
+    color: #a0a0a0;
+}
+
+.third-place {
+    color: #cd7f32;
+}
+
+.another-place {
+    color: #666;
 }
 
 .answer-marker {

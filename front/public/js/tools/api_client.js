@@ -1,5 +1,6 @@
 const PROTOCOL = "http"
 const SERVER_ADDRESS = "localhost:12338"
+const questionsCount = 5
 
 
 function formFetch(endpoint, jsonBody) {
@@ -34,7 +35,7 @@ export async function clientLeaveGame(playerSessionToken, roomId) {
     return response;
 }
 
-export async function clientStartGame(playerSessionToken, roomId, questionsPerPlayer=5) {
+export async function clientStartGame(playerSessionToken, roomId, questionsPerPlayer=questionsCount) {
     let response = await formFetch("/start", {
         "player_session_token": playerSessionToken,
         "room_id": roomId,
@@ -75,6 +76,15 @@ export async function answerQuestion(playerSessionToken, roomId, optionIndex) {
         "player_session_token": playerSessionToken,
         "room_id": roomId,
         "answer": optionIndex
+    })
+    response = await response.json(); writeErrors(response)
+    return response;
+}
+
+export async function clientGetResults(playerSessionToken, roomId) {
+    let response = await formFetch("/results", {
+        "player_session_token": playerSessionToken,
+        "room_id": roomId
     })
     response = await response.json(); writeErrors(response)
     return response;
