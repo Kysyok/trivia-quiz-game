@@ -4,10 +4,14 @@ const questionsCount = 5
 
 
 function formFetch(endpoint, jsonBody) {
-    return fetch(`${PROTOCOL}://${SERVER_ADDRESS}${endpoint}`, {
-        method: "POST",
-        body: JSON.stringify(jsonBody)
-    })
+    try {
+        return fetch(`${PROTOCOL}://${SERVER_ADDRESS}${endpoint}`, {
+            method: "POST",
+            body: JSON.stringify(jsonBody)
+        })
+    } catch(e) {
+        console.log(`A polling error occurred! For${PROTOCOL}://${SERVER_ADDRESS}${endpoint} — ${e}`)
+    }
 }
 
 
