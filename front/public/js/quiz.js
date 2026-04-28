@@ -67,6 +67,9 @@ async function quizLoop() {
     const response = await clientNextQuestion(sessionStorage.getItem("sessionToken"), sessionStorage.getItem("roomNumber"))
     if (response.error?.includes("No more"))
         window.location.href = 'leader_board.html'
+    if (response.error) {
+        return
+    }
     time = performance.now() - time
     setVariantsVisibility(response.answering === sessionStorage.getItem("playerNickname"))
     questionText.textContent = response.question.text

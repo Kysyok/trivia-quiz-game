@@ -10,9 +10,14 @@ function getStatusStyle(rank) {
     if (rank === 3) return { class: "third-place", text: "★ 3rd place" };
     return { color: "another-place", text: rank + "th place" };
 }
-const result = Object.entries(await clientGetResults(
+let result = await clientGetResults(
     sessionStorage.getItem("sessionToken"),
-    sessionStorage.getItem("roomNumber")))
+    sessionStorage.getItem("roomNumber"))
+while (result.error)
+    result = await clientGetResults(
+        sessionStorage.getItem("sessionToken"),
+        sessionStorage.getItem("roomNumber"))
+result = Object.entries(result)
 result.sort((a, b) => parseInt(b[1]) - parseInt(a[1]))
 document.querySelector("#playerCount").textContent = result.length
 for (const [i, [nickname, sc]] of result.entries()) {

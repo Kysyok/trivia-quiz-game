@@ -24,6 +24,9 @@ async function playerListUpdateCycle() {
     const playersAndStatus = await clientPlayersAndStatus(
         sessionStorage.getItem("sessionToken"),
         sessionStorage.getItem("roomNumber"))
+    if (playersAndStatus.error) {
+        return
+    }
     redirectIfUnstarted(playersAndStatus.status)
     playersTable.innerHTML = ''
     if (playersAndStatus.players[0] === sessionStorage.getItem("playerNickname"))

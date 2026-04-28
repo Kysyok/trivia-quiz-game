@@ -2,94 +2,85 @@ const PROTOCOL = "http"
 const SERVER_ADDRESS = "localhost:12338"
 const questionsCount = 5
 
+let msEntireLatency = 0
+let latencyMeasurementsCount = 0
 
-function formFetch(endpoint, jsonBody) {
+async function fetchBody(endpoint, jsonBody) {
     try {
-        return fetch(`${PROTOCOL}://${SERVER_ADDRESS}${endpoint}`, {
+        let startTime = performance.now()
+        let response = await fetch(`${PROTOCOL}://${SERVER_ADDRESS}${endpoint}`, {
             method: "POST",
             body: JSON.stringify(jsonBody)
         })
+        response = await response.json()
+        if (response.error)
+            console.log(response.error)
+        msEntireLatency += performance.now() - startTime
+        latencyMeasurementsCount++
+        console.log(`Current Latency: ${Math.round(performance.now() - startTime)}ms\nAverage Latency: ${Math.round(msEntireLatency / latencyMeasurementsCount)}ms`)
+        return response
     } catch(e) {
         console.log(`A polling error occurred! For${PROTOCOL}://${SERVER_ADDRESS}${endpoint} — ${e}`)
+        return {
+            "error": "polling error"
+        }
     }
 }
 
 
-function writeErrors(response) {
-    if (response.error)
-        console.log(response.error)
-}
-
-
 export async function clientJoinGame(roomId, nickname) {
-    let response = await formFetch("/join", {
+    return await fetchBody("/join", {
         "room_id": roomId,
         "nickname": nickname
     })
-    response = await response.json(); writeErrors(response)
-    return response;
 }
 
 export async function clientLeaveGame(playerSessionToken, roomId) {
-    let response = await formFetch("/leave", {
+    return await fetchBody("/leave", {
         "player_session_token": playerSessionToken,
         "room_id": roomId
     })
-    response = await response.json(); writeErrors(response)
-    return response;
 }
 
 export async function clientStartGame(playerSessionToken, roomId, questionsPerPlayer=questionsCount) {
-    let response = await formFetch("/start", {
+    return await fetchBody("/start", {
         "player_session_token": playerSessionToken,
         "room_id": roomId,
         "questions_per_player": questionsPerPlayer
     })
-    response = await response.json(); writeErrors(response)
-    return response;
 }
 
 export async function clientCreateGame(nickname) {
-    let response = await formFetch("/create", {
+    return await fetchBody("/create", {
         "nickname": nickname
     })
-    response = await response.json(); writeErrors(response)
-    return response;
 }
 
 export async function clientPlayersAndStatus(playerSessionToken, roomId) {
-    let response = await formFetch("/players", {
+    return await fetchBody("/players", {
         "player_session_token": playerSessionToken,
         "room_id": roomId
     })
-    response = await response.json(); writeErrors(response)
-    return response;
 }
 
 export async function clientNextQuestion(playerSessionToken, roomId) {
-    let response = await formFetch("/next", {
+    return await fetchBody("/next", {
         "player_session_token": playerSessionToken,
         "room_id": roomId
     })
-    response = await response.json(); writeErrors(response)
-    return response;
 }
 
 export async function answerQuestion(playerSessionToken, roomId, optionIndex) {
-    let response = await formFetch("/answer", {
+    return await fetchBody("/answer", {
         "player_session_token": playerSessionToken,
         "room_id": roomId,
         "answer": optionIndex
     })
-    response = await response.json(); writeErrors(response)
-    return response;
 }
 
 export async function clientGetResults(playerSessionToken, roomId) {
-    let response = await formFetch("/results", {
+    return await fetchBody("/results", {
         "player_session_token": playerSessionToken,
         "room_id": roomId
     })
-    response = await response.json(); writeErrors(response)
-    return response;
 }
