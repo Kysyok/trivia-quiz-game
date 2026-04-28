@@ -1,4 +1,4 @@
-# 🎮 Multiplayer Trivia Quiz Game
+# 🎮 [Multiplayer Trivia Quiz Game](http://10.90.138.41/join.html)
 
 A turn-based multiplayer trivia quiz game built using Python sockets.  
 Players connect to a server, join game rooms, answer questions, and compete based on their scores.
@@ -57,11 +57,16 @@ Question / Player / Room Modules
 ```
 backend/
  ├── src/
- │   ├── api/           
+ │   ├── api/
+ │   │   ├── routes/      
+ │   │   ├── slow_api/     
+ │   │   └── __init__.py           
  │   ├── app/            
  │   │   ├── game/      
  │   │   ├── server/     
- │   │   ├── tools/      
+ │   │   ├── tools/
+ │   │   ├── __init__.py
+ │   │   └── main.py      
  ├── .dockerignore
  ├── .env.example        
  ├── Dockerfile          
@@ -95,8 +100,8 @@ front/
 ## 🚀 Installation & Setup
 
 ### 🔧 Prerequisites
-- Python 3.14+
-- Docker & Docker Compose (optional but recommended)
+- Docker & Docker Compose
+- [uv](https://docs.astral.sh/uv/)
 
 ---
 ### 🚀 Project setup
@@ -126,7 +131,7 @@ from where you will be able to access ```http://localhost/join.html```
 
 ## 🎮 How to Use
 
-1. Open the frontend in your browser  
+1. Open the [game](http://10.90.138.41/join.html) in your browser  
 2. Enter a username  
 3. Join or create a game room  
 4. Wait for other players  
